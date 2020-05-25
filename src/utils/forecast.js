@@ -10,11 +10,12 @@ const forecast = (longitude, latitude, callback) => {
         } else if (undefined, body.success === false) {
             callback('Unable to find location. Please try another location.')
         } else {
-            callback(undefined, JSON.stringify({
+            const forecastArray = JSON.stringify({
                 description: body.current.weather_descriptions,
                 temperature: body.current.temperature,
                 feelslike: body.current.feelslike
-            }))
+            })
+            callback(undefined, forecastArray)
         }
     })
 }
