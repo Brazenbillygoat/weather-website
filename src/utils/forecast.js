@@ -10,9 +10,13 @@ const forecast = (longitude, latitude, callback) => {
         } else if (undefined, body.success === false) {
             callback('Unable to find location. Please try another location.')
         } else {
-            console.log(body.current)
-            callback(undefined, body.current.weather_descriptions + '. It is currently ' + body.current.temperature + ' degrees outside. It feels like ' + body.current.feelslike +
-            ' degrees, and the humidity is ' + body.current.humidity + '%.')
+            const forecastObject = JSON.stringify({
+                description: 'The weather report for today shows: ' + body.current.weather_descriptions + '.',
+                temperature: 'The current temperature is ' + body.current.temperature + '.',
+                feelslike: 'It feels like ' + body.current.feelslike + '.',
+                humidity: 'The wind speed is ' + body.current.wind_speed + '.'
+            })
+            callback(undefined, JSON.parse(forecastObject))
         }
     })
 }
